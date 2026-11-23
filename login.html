@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>เข้าสู่ระบบ | เที่ยวบ้านเรา</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ส่วนตกแต่งฟอร์มเข้าสู่ระบบ ใช้โทนสีเดียวกับ style.css
+       (ถ้าต้องการ ย้ายส่วนนี้ไปต่อท้ายไฟล์ style.css ได้เลย) */
+    .login-wrap {
+      width: min(100%, 26rem);
+      margin: 0 auto;
+    }
+    .login-card {
+      padding: 1.5rem;
+      border: 1px solid #BFE3D3;
+      border-top: 4px solid #F2795A;      /* แถบส้มพระอาทิตย์ตกด้านบนฟอร์ม */
+      border-radius: 0.75rem;
+      background: #FFF6E9;                /* ครีมทรายอุ่น เหมือน .card */
+    }
+    .login-card h1 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      text-align: center;
+    }
+    .login-intro {
+      margin: 0 0 1.25rem;
+      text-align: center;
+    }
+    .field {
+      margin-bottom: 1rem;
+    }
+    .field label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: bold;
+      color: #0F5C73;
+    }
+    .field input[type="text"],
+    .field input[type="password"] {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      font: inherit;
+      color: #16343F;
+      background: #ffffff;
+      border: 1px solid #7FC8A9;          /* เขียวมินต์ */
+      border-radius: 0.35rem;
+    }
+    .field input:focus-visible {
+      outline: 3px solid #F2795A;
+      outline-offset: 2px;
+      border-color: #0F5C73;
+    }
+    .field-error {
+      min-height: 1.4rem;
+      margin: 0.25rem 0 0;
+      font-size: 0.9rem;
+      color: #B3391F;
+    }
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+    .options label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .options a, .login-foot a {
+      color: #0F5C73;
+    }
+    .login-card .button {
+      width: 100%;
+      border: 0;
+      font: inherit;
+      cursor: pointer;
+    }
+    .login-status {
+      min-height: 1.4rem;
+      margin: 0.75rem 0 0;
+      text-align: center;
+      color: #0F5C73;
+      font-weight: bold;
+    }
+    .login-foot {
+      margin: 1.25rem 0 0;
+      padding-top: 1rem;
+      border-top: 1px dashed #BFE3D3;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="site-name">เที่ยวบ้านเรา</p>
+    <nav aria-label="เมนูหลัก">
+      <ul>
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="places.html">ที่เที่ยว</a></li>
+        <li><a href="food.html">อาหาร</a></li>
+        <li><a href="plan.html">วางแผนเที่ยว</a></li>
+        <li><a href="travel.html">ข้อมูลการเดินทาง</a></li>
+        <li><a href="login.html" aria-current="page">เข้าสู่ระบบ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-wrap">
+      <section class="login-card" aria-labelledby="login-title">
+        <h1 id="login-title">เข้าสู่ระบบ</h1>
+        <p class="login-intro">เข้าสู่ระบบเพื่อบันทึกแผนเที่ยวของคุณ</p>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="username">ชื่อผู้ใช้หรืออีเมล</label>
+            <input type="text" id="username" name="username" autocomplete="username" required>
+            <p class="field-error" id="username-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="password">รหัสผ่าน</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
+            <p class="field-error" id="password-error" role="alert"></p>
+          </div>
+
+          <div class="options">
+            <label><input type="checkbox" name="remember"> จดจำฉันไว้</label>
+            <a href="#">ลืมรหัสผ่าน?</a>
+          </div>
+
+          <button class="button" type="submit">เข้าสู่ระบบ</button>
+          <p class="login-status" id="login-status" role="status"></p>
+        </form>
+
+        <p class="login-foot">ยังไม่มีบัญชี? <a href="#">สมัครสมาชิก</a></p>
+      </section>
+    </div>
+
+    <p style="text-align:center; margin-top:1.5rem;">
+      <a class="button" href="index.html">กลับหน้าแรก</a>
+    </p>
+  </main>
+
+  <footer>
+    <p>เที่ยวบ้านเรา · ใบงานฝึกปฏิบัติวิชาการสร้างเว็บไซต์ทางธุรกิจ</p>
+  </footer>
+
+  <script>
+    // ตรวจสอบข้อมูลฝั่งหน้าเว็บเท่านั้น (ยังไม่มีระบบหลังบ้านจริง)
+    (function () {
+      var form = document.getElementById('login-form');
+      var user = document.getElementById('username');
+      var pass = document.getElementById('password');
+      var userErr = document.getElementById('username-error');
+      var passErr = document.getElementById('password-error');
+      var status = document.getElementById('login-status');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        userErr.textContent = '';
+        passErr.textContent = '';
+        status.textContent = '';
+        var ok = true;
+
+        if (user.value.trim() === '') {
+          userErr.textContent = 'กรุณากรอกชื่อผู้ใช้หรืออีเมล';
+          ok = false;
+        }
+        if (pass.value.length < 6) {
+          passErr.textContent = 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร';
+          ok = false;
+        }
+        if (!ok) {
+          (userErr.textContent ? user : pass).focus();
+          return;
+        }
+        status.textContent = 'กรอกข้อมูลครบถ้วน (หน้าตัวอย่าง ยังไม่ได้เชื่อมต่อระบบสมาชิก)';
+      });
+    })();
+  </script>
+</body>
+</html>
